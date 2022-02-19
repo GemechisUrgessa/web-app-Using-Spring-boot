@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form th:object = "${contentHolder}" enctype="multipart/form-data" method="POST" th:action="@{/content/upload}">
+        <p>enter content title</p>
+        <input type="text" th:field="*{title}" >
+        <p>enter content body</p>
+        <input type="text" th:field="*{contentData}" >
+        <p>enter content title</p>
+        <input type="date" th:field="*{yearElapsed}">
+        <p>enter content type</p>
+        <input type="text" th:field="*{contentType}">
+        <p>Upload the picture</p>
+        <input name = "picture" type="file">
+        <br>
+        <br>
+        <input type="submit">
+    </form>
+
+    
+</body>
+</html>

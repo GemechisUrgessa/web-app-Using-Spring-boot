@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Admin</title>
+    <link rel="stylesheet" th:href="@{/admin/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" th:href="@{/admin/fonts/fontawesome-all.min.css}">
+    <link rel="stylesheet" th:href="@{/admin/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/admin/fonts/fontawesome5-overrides.min.css}">
+    <link rel="stylesheet" th:href="@{/admin/css/untitled.css}">
+</head>
+
+<body id="page-top">
+    <div  id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div  class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"></div>
+                    <div class="sidebar-brand-text mx-3"><span></span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul  class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link active" href=""><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="profile.html"><i class="fas fa-user"></i><span>Profile</span></a></li> -->
+                    <li class="nav-item" ><a class="nav-link btn"  id="btn1" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-table"></i><span>Add content</span></a>
+                             <!-- <button type="button" class="btn btn-outline-primary mx-auto block" id="btn1"data-toggle="modal" data-target="#exampleModalLong">UPDATE SERVICE</button> -->
+                    </li>
+                          <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content"style="max-width: 90rem;">
+                                <div class="modal-header">
+                                  <h5 class="modal-title text-dark" id="exampleModalLongTitle">Upload content</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" id="close" class="bg-light" ><i class="fas fa-times bg-light"></i></span>
+                                  </button>
+                                </div>
+                            <div class="modal-body" >
+                          <div class="container-fluid">
+                              <!-- <h1 class="fs-4 text-center text-secondary"></h1> -->
+                            <div class="card shadow mb-3">
+                                        <div class="card-header py-3">
+                                            <p class="text-primary m-0 fw-bold">Fill the form</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <form th:object = "${contentHolder}" enctype="multipart/form-data" method="POST" th:action="@{/content/upload}">
+                                                <div class="row">
+                                                    <!-- <div class="col"> -->
+                                                        <div class="mb-3"><label class="form-label text-dark" for="title"><strong>Content title</strong></label><input th:field="*{title}" class="form-control" type="text" id="title" placeholder="content title" name="title"></div>
+                                                    <!-- </div> -->
+                                                    <!-- <div class="col"> -->
+                                                        <div class="mb-3"><label class="form-label text-dark" for="region"><strong>content data</strong></label><textarea th:field="*{contentData}" class="form-control" type="text" id="region" rows="10" placeholder="actual content" name="region"></textarea></div>
+                                                    <!-- </div> -->
+                                                </div>
+                                                <div class="row">
+                                                    <!-- <div class="col"> -->
+                                                        <div class="mb-3"><label class="form-label text-dark" for="year"><strong>Content upload Date</strong></label><input th:field="*{yearElapsed}" class="form-control" type="date" id="year" placeholder="19.." name="year"></div>
+                                                    <!-- </div> -->
+                                                    <!-- <div class="col"> -->
+                                                        <div class="mb-3"><label class="form-label text-dark" for="content"><strong>Content Type</strong></label>
+                                                            <select  name="type" th:field="*{contentType}" id="">
+                                                                <option th:each="ty : ${type}" th:text = ${ty} th:value=" ${ty} "></option>
+                                                            </select>
+                                                    
+                                                        
+                                                        </div>
+                                                        <div class="mb-3"><label class="form-label text-dark" for="year"><strong>Choose Picture</strong></label><input name = "picture" type="file"class="form-control" id="year" placeholder="19.."></div>
+                                                       
+                                                </div>
+                                              
+                                        
+                                        </div>
+                                    </div>
+                           
+                        
+                           
+                           
+                           
+                            
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close1">CLOSE</button>
+                                <button type="submit" class="btn btn-primary">Upload content</button>
+                              </div>
+                            </form>
+                              </div>
+                            </div>
+                          </div>
+                            </div>
+                          </div>
+                    <!-- ....... -->
+                    <!-- <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Modal Title</h4><button type="button" class="close1" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>The content of your modal.</p>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="input-group"><span class="input-group-text">Addon</span><input class="form-control" type="text"><button class="btn btn-primary" type="button">Button</button></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal" id="close">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        
+                    <li class="nav-item"><a class="nav-link" th:href="@{/logout}"><i class="far fa-user-circle"></i><span>Log Out</span></a></li>
+                    <li class="nav-item"></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
+                       <a class="btn btn-primary" th:href="@{/}">Home</a>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                
+                                <div class="nav-item dropdown no-arrow">  <a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span th:text="${#lists.size('ques')}" class="badge bg-danger badge-counter"></span><i class="fas fa-bell fa-fw"></i></a>
+                                    <div  class="dropdown-menu dropdown-menu-end dropdown-list animated--grow-in">
+                                        <h6 class="dropdown-header">Contents In Que</h6>
+                                        <a th:each = "que : ${ques}" class="dropdown-item d-flex align-items-center" th:href="@{'/que/detail/'+${que.id}}">
+                                            <div class="me-3">
+                                                <div class=" icon-circle"><img th:src="@{'/img/que/' + ${que.id}}" style = "width:50px;border-radius: 10px" alt = "img not found" class="fas fa-file-alt text-white"></div>
+                                            </div>
+                                            <div style="display: flex; flex-direction: column; justify-content: center; align-items: flex-start;" class =''>  <span class="small h5 text-dark-500" th:text = " 'Approved By '+ ${que.approvalCount} + ' and declined by '+${que.declineCount}+ ' Admins so far'"> </span>
+                                                <p class="h5" th:text = "${que.title}"></p>
+                                                <p style="width:auto;padding: 0;" class="alert alert-warning" th:if="'true'==${que.isUpdate}">Update</p>
+                                                <p style="width:auto;padding: 0;"  class="alert alert-warning" th:unless="'true'==${que.isUpdate}">New</p>
+                                            </div>
+                                        </a>
+                                        </div>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <div class="shadow dropdown-list dropdown-menu dropdown-menu-end" aria-labelledby="alertsDropdown"></div>
+                            </li>
+                            <div class="d-none d-sm-block topbar-divider"></div>
+                            <li class="nav-item dropdown no-arrow"> 
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small" th:text="${userName}"></span></a>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
+                                    </div>
+                                </div>
+                            </li> 
+                        </ul>
+                    </div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-dark mb-0">Dashboard</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xl-3 mb-4 adm_btn">
+                            <div class="card shadow border-start-primary py-2"><button class="btn btn-primary " type="button" id="btn" data-toggle="modal" data-target="#exampleModalLong">Upload content</button></div>
+                        </div>
+                        <div class="col-md-6 col-xl-3 mb-4 adm_btn">
+                            <div class="card shadow border-start-success py-2"><a th:href="@{/gallary/upload}" class="btn btn-primary" type="button">Add Gallary</a></div>
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 col-xl-8">
+                            <div class="card shadow mb-4">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="text-primary fw-bold m-0">Active Users</h6>
+                                    <div class="dropdown no-arrow">
+                                        <!-- <button class="btn btn-link btn-sm dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button> -->
+                                        <!-- <div class="dropdown-menu shadow dropdown-menu-end animated--fade-in">
+                                            <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" href="#">&nbsp;Action</a><a class="dropdown-item" href="#">&nbsp;Another action</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">&nbsp;Something else here</a>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Active Users&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;0&quot;,&quot;10000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;backgroundColor&quot;:&quot;rgba(78, 115, 223, 0.05)&quot;,&quot;borderColor&quot;:&quot;rgba(78, 115, 223, 1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;padding&quot;:20}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;]},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;padding&quot;:20}}]}}}"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                             <div class="card shadow mb-4" style="max-width:300px;">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary fw-bold m-0">User list</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex flex-row justify-content-xl-start" th:each="user:${user}" ><i class="fa fa-user-circle-o adm_ic"></i>
+                                        <span th:text="${user.id}"></span><span th:text="---">  </span>
+                                        <span class="small fw-bold" th:text="*{user.username}">Admin 1<span class="adm_spa">Active</span></span>      </div>
+                                <!-- <div class="card-body" th:each="${user}">
+                                    <div class="d-flex flex-row justify-content-xl-center"><i class="fa fa-user-circle-o adm_ic"></i>
+                                        <span></span>
+                                    <span class="small fw-bold" th:text="*{user.username}">Admin 1<span class="adm_spa">Active</span></span>
+                                </div> -->
+                                
+                                </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary fw-bold m-0">Message From Site Users</h6>
+                                </div>
+                                <div th:each="contact: ${contacts}" class="card-body">
+                                    <p th:text="|user id: ${contact.userId}|"></p>
+                                    <span class="h3" th:text = "${contact.Name}" ></span> <span  th:text = "${contact.Email}" class="float-end" ></span>
+                                    <h4 th:text="${contact.Message}" class="small fw-bold">Comment providing<span class="float-end">20%</span></h4>
+                                    
+                                      </div>
+                            </div>
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="text-primary fw-bold m-0" >Site Statistics</h6>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="small fw-bold">content size<span class="float-end" th:text="${contents}">20%</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-danger" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%;"><span class="visually-hidden">20%</span></div>
+                                    </div>
+                                    <h4 class="small fw-bold"> Toutal users <span class="float-end" th:text="${users}">60%</span></h4>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-primary" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"><span class="visually-hidden">60%</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="card shadow mb-4">
+                                <ul class="list-group list-group-flush"></ul>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Ethiopia 2022</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script th:src="@{/admin/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/admin/js/chart.min.js}"></script>
+    <script th:src="@{/admin/js/bs-init.js}"></script>
+    <script th:src="@{/admin/js/theme.js}"></script>
+    <script
+src="https://code.jquery.com/jquery-3.6.0.min.js"
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+crossorigin="anonymous"></script>
+    <script type="text/javascript">
+  $('#btn1').on('click',function(){
+      $('#exampleModalLong').modal('show');
+  });
+  $('#btn').on('click',function(){
+      $('#exampleModalLong').modal('show');
+  });
+   $('#close').on('click',function(){
+      $('#exampleModalLong').modal('hide');
+  });
+   $('#close1').on('click',function(){
+      $('#exampleModalLong').modal('hide');
+  });
+</script>
+</body>
+
+</html>

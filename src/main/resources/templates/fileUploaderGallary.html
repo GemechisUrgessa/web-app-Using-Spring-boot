@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form th:object = "${gallaryHolder}" enctype="multipart/form-data" method="POST" th:action="@{/gallary/upload/}">
+        <p>enter content name</p>
+        <input type="text" th:field="*{Name}" >
+        <p>enter content body</p>
+        <input type="text" th:field="*{description}" >
+        <p>Upload the picture</p>
+        <input name = "picture" type="file">
+        <br>
+        <br>
+        <input type="submit">
+    </form>
+
+    
+</body>
+</html>

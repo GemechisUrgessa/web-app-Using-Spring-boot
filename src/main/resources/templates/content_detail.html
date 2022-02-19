@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Article</title>
+    <link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/https:/fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800}">
+    <link rel="stylesheet" th:href="@{/https:/fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/fonts/ionicons.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/Contact-Form-Clean.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/Login-Form-Dark.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/Map-Clean.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/Registration-Form-with-Photo.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/untitled.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/search.css}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand home_link" th:href="@{/}">Ethiopia</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto align-items-xl-center">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/content/getAll/HISTORY}">History</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/content/getAll/CULTURE}">Culture</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/content/getAll/SITE}">Site</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/gallary}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/map}">Map</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/about}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact Us</a></li>
+                   
+                    <li th:if = "'false'==${logged}" class="nav-item mx-2">
+                        <a style="max-width: 100px;" class="nav-link btn my-2 btn-primary" th:href="@{/login}">Login</a>
+                        <a style="max-width: 100px;" class="nav-link btn btn-primary" th:href="@{/register}">Register</a>
+                    </li>
+                    <li th:if="'admin'==${role}" class="nav-item mx-2"><a style="max-width: 120px;" class="nav-link btn btn-secondary" th:href="@{/adminPage}">DashBoard</a></li>
+                    <li th:if="'true'==${logged}" class="nav-item mx-2">
+                        <a style="max-width: 90px;" class="nav-link my-2 btn btn-primary" th:href="@{/logout}">Logout</a>
+                        <a style="max-width: 90px;" class="nav-link btn btn-primary" th:href="@{/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="GET" th:action="@{/search}">
+                            <input type="text" class="search-hover" name="searchterms" placeholder="&#128270;" />
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="/*background-image: url('assets/img/post-bg.jpg');*/">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto position-relative">
+                    <div class="post-heading">
+                        <h1>Welcome! Lets explore Ethiopian History.<br></h1><span class="meta">"What is history but a fable agreed upon?"<br></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div th:if="'admin'==${role}" class="his_rat_div">
+                        <a class="btn btn-primary" th:href="@{'/content/edit/'+${content.id}}">Edit Content</a>
+                        <!-- <i class="fa fa-star-o his_rat_div_st st_m"></i><i class="fa fa-star-o his_rat_div_st"></i><i class="fa fa-star-o his_rat_div_st"></i><i class="fa fa-star-o his_rat_div_st"></i><i class="fa fa-star-o his_rat_div_st"></i> -->
+                    </div>
+                </div>
+            </div>
+            <div  class="row">
+                <div th:object = "${content}" class="col his_col_dit"><img class="img-thumbnail d-xl-flex justify-content-xl-center his_img_di" th:src="@{'/img/'+${content.id}}">
+                    <h1 th:text = "${content.title}"></h1>
+                    <p th:text = "${content.contentData}"></p>
+                    <ul class="list-unstyled text-start d-flex float-start justify-content-xl-center align-items-xl-center">
+                        <li class="text-nowrap his_list"><span th:text="${content.yearElapsed}"></span></li>
+                        <li class="text-nowrap his_list"><i class="fa fa-eye"></i><span class="his_list_sp" th:text = "${content.viewCount}"></span></li>
+                        <li class="text-nowrap his_list"><i class="fa fa-comments-o"></i><span class="his_list_sp" th:text="${content.commentCount}"></span></li>
+                     </ul>
+                </div>
+            </div>
+            <div  class="row">
+                <h6 class="display-6 text-start text-secondary float-center d-xxl-flex justify-content-end align-items-end align-content-end align-self-end justify-content-xxl-start">Comment section</h6>
+                <div class="col d-flex d-xxl-flex flex-column  align-content-center align-self-center">
+                   
+                    <div class="m-2" style = "display: flex;flex-direction: column; background-color: #dfe7f1;border-radius: 0.5em;"  th:each="comment :${existingComments}" >
+                        <p style="min-width: 50vw;" class="h6" th:text = "${comment.User.username}"></p>
+                        <p th:text = "${comment.CommentBody}"  class="his_col_dit_div_com"></p>
+                    </div>
+                   
+                   
+                </div>
+                <div class="col">
+                    <form th:action="@{'/content/comment/'+${content.id}}" method="POST">
+                        <div ><textarea class="form-control" name ="usercomment" ></textarea><button class="btn btn-primary" type="submit" >Add Comment</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </article>
+    <footer style="background-color: #0A142F;">
+        <div  class="container">
+          <i> <p class="footer_par text-light">We will help you to know more about Ethiopia</p> </i> 
+            <h1 class="footer_hea text-light">ETHIOPIA A LAND OF BEAUTY</h1>
+            <button class="btn btn-primary footer_btn text-light" type="button"><a th:href="@{/contact}">CONTACT US</a></button>
+            <p class="text-muted copyright text-light">Copyright&nbsp;©&nbsp;Ethiopia 2022</p>
+            <div class="row footer_row">
+                <div class="col"><img class="footer_img" th:src="@{/assets/img/eth.png}"></div>
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <ul class="list-inline text-center footer_list">
+                        <li class="list-inline-item"><a href="https://www.twitter.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+                        <li class="list-inline-item"><a href="https://www.telegram.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-telegram fa-stack-1x fa-inverse"></i></span></a</li>
+                        <li class="list-inline-item"><a href="https://www.facebook.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"></i></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/clean-blog.js}"></script>
+</body>
+
+</html>

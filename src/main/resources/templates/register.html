@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Register</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/Map-Clean.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+    <link rel="stylesheet" th:href="@{/assets/css/search.css}">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand home_link" th:href="@{/}">Ethiopia</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto align-items-xl-center">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/content/getAll/HISTORY}">History</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/content/getAll/CULTURE}">Culture</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/content/getAll/SITE}">Site</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/gallary}">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/map}">Map</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/about}">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Contact Us</a></li>
+                   
+                    <li th:if = "'false'==${logged}" class="nav-item mx-2">
+                        <a style="max-width: 100px;" class="nav-link btn my-2 btn-primary" th:href="@{/login}">Login</a>
+                        <a style="max-width: 100px;" class="nav-link btn btn-primary" th:href="@{/register}">Register</a>
+                    </li>
+                    <li th:if="'admin'==${role}" class="nav-item mx-2"><a style="max-width: 120px;" class="nav-link btn btn-secondary" th:href="@{/adminPage}">DashBoard</a></li>
+                    <li th:if="'true'==${logged}" class="nav-item mx-2">
+                        <a style="max-width: 90px;" class="nav-link my-2 btn btn-primary" th:href="@{/logout}">Logout</a>
+                        <a style="max-width: 90px;" class="nav-link btn btn-primary" th:href="@{/profile}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="GET" th:action="@{/search}">
+                            <input type="text" class="search-hover" name="searchterms" placeholder="&#128270;" />
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="/*background-image: url('assets/img/post-bg.jpg');*/">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto position-relative">
+                    <div class="post-heading">
+                        <h1>Register here.</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <section class="register-photo">
+                        <div class="form-container">
+                            <form th:object="${newUser}" th:action="@{/register}" method="POST">
+                                <h2 class="text-center"><strong>Create</strong> an account.</h2>
+                                <p class = 'alert alert-danger' th:if = "'error' == ${duplicate}">User Name already Taken</p>
+                                <div class="mb-3"><input class="form-control" th:field="*{username}" type="text" name="username" placeholder="user name">
+                                    <!-- <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="font-size: 0.7em;" class="mb-3 alert alert-danger">user name can not be blank</p> -->
+                               <p class = "alert alert-danger" th:if= "'error'==${name}">User Name can not be blank</p>         
+                                </div>
+                                <div class="mb-3"><input class="form-control" th:field="*{Email}" type="email" name="email" placeholder="Email">
+                                    <p class= 'alert alert-danger' th:if="'error'==${email}">Email can not be blank </p></div>
+                                <div class="mb-3"><input class="form-control"th:field="*{password}" type="password" name="password" placeholder="Password">
+                                    <p class= 'alert alert-danger' th:if="'error'==${password}">Password must be at least six characters</p>
+                                </div>
+                                <div class="mb-3">
+                                    <!-- <div class="form-check"><label class="form-check-label"><input class="form-check-input" type="checkbox">Remember me!</label></div> -->
+                                </div>
+                                <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Sign Up</button></div><a class="already" th:href="@{/login}">You already have an account? Login here.</a>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </article>
+    <footer style="background-color: #0A142F;">
+        <div  class="container">
+          <i> <p class="footer_par text-light">We will help you to know more about Ethiopia</p> </i> 
+            <h1 class="footer_hea text-light">ETHIOPIA A LAND OF BEAUTY</h1>
+            <button class="btn btn-primary footer_btn text-light" type="button"><a th:href="@{/contact}">CONTACT US</a></button>
+            <p class="text-muted copyright text-light">Copyright&nbsp;©&nbsp;Ethiopia 2022</p>
+            <div class="row footer_row">
+                <div class="col"><img class="footer_img" th:src="@{/assets/img/eth.png}"></div>
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <ul class="list-inline text-center footer_list">
+                        <li class="list-inline-item"><a href="https://www.twitter.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></li>
+                        <li class="list-inline-item"><a href="https://www.telegram.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-telegram fa-stack-1x fa-inverse"></i></span></a</li>
+                        <li class="list-inline-item"><a href="https://www.facebook.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-instagram fa-stack-1x fa-inverse"></i></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/clean-blog.js}"></script>
+</body>
+
+</html>
